@@ -1,16 +1,18 @@
-import { NextApiRequest, NextApiResponse } from 'next'
-import { sampleUserData } from '../../../utils/sample-data'
+import { NextApiRequest, NextApiResponse } from 'next';
+import { sampleUserData } from '../../../utils/sample-data';
+import db from 'database';
 
-const handler = (_req: NextApiRequest, res: NextApiResponse) => {
+const handler = async (_req: NextApiRequest, res: NextApiResponse) => {
   try {
     if (!Array.isArray(sampleUserData)) {
-      throw new Error('Cannot find user data')
+      throw new Error('Cannot find user data');
     }
+    await db.models.User.findAll();
 
-    res.status(200).json(sampleUserData)
+    res.status(200).json(sampleUserData);
   } catch (err) {
-    res.status(500).json({ statusCode: 500, message: err.message })
+    res.status(500).json({ statusCode: 500, message: err.message });
   }
-}
+};
 
-export default handler
+export default handler;
