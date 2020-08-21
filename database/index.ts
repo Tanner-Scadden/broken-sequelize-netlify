@@ -1,17 +1,18 @@
-import { Sequelize } from "sequelize";
-import { UserFactory } from "./models/user";
+import { Sequelize } from 'sequelize';
+import { UserFactory } from './models/user';
 
-const database: string = process.env.DATABASE || "";
-const username: string = process.env.USERNAME || "";
-const password: string = process.env.PASSWORD || "";
+const database: string = process.env.DATABASE || '';
+const username: string = process.env.USERNAME || '';
+const password: string = process.env.PASSWORD || '';
 
 const sequelize = new Sequelize({
   database,
   username,
   password,
   host: process.env.HOST,
-  dialect: "postgres",
+  dialect: 'postgres',
   logging: false,
+  dialectModule: require('pg'),
   dialectOptions: {
     ssl: {
       rejectUnauthorized: false,
@@ -38,9 +39,9 @@ const db = {
 (async () => {
   try {
     await sequelize.authenticate();
-    console.log("Database connection has been established successfully.");
+    console.log('Database connection has been established successfully.');
   } catch (error) {
-    console.error("Unable to connect to the database:", error);
+    console.error('Unable to connect to the database:', error);
   }
 })();
 
