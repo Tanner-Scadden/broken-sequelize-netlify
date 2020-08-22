@@ -10,7 +10,6 @@ const sequelize = new Sequelize({
   username,
   password,
   host: process.env.HOST,
-  native: false,
   dialect: 'postgres',
   logging: false,
   dialectModule: require('pg'),
