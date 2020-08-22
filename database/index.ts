@@ -1,6 +1,3 @@
-const pg = require('pg');
-delete pg.native;
-
 import { Sequelize } from 'sequelize';
 import { UserFactory } from './models/user';
 
@@ -16,7 +13,7 @@ const sequelize = new Sequelize({
   native: false,
   dialect: 'postgres',
   logging: false,
-  dialectModule: pg,
+  dialectModule: require('pg'),
   dialectOptions: {
     ssl: {
       rejectUnauthorized: false,
