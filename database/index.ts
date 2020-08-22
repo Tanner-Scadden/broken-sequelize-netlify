@@ -1,3 +1,6 @@
+const pg = require('pg');
+delete pg.native;
+
 import { Sequelize } from 'sequelize';
 import { UserFactory } from './models/user';
 
@@ -10,9 +13,10 @@ const sequelize = new Sequelize({
   username,
   password,
   host: process.env.HOST,
+  native: false,
   dialect: 'postgres',
   logging: false,
-  dialectModule: require('pg'),
+  dialectModule: pg,
   dialectOptions: {
     ssl: {
       rejectUnauthorized: false,
@@ -39,9 +43,9 @@ const db = {
 (async () => {
   try {
     await sequelize.authenticate();
-    console.log('Database connection has been established successfully.');
+    // console.log('Database connection has been established successfully.');
   } catch (error) {
-    console.error('Unable to connect to the database:', error);
+    // console.error('Unable to connect to the database:', error);
   }
 })();
 
